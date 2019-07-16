@@ -1,10 +1,13 @@
-from setuptools import setup
+import setuptools
 
-setup(
+with open('README.md') as f:
+	ld = f.read()
+
+setuptools.setup(
 	name="rubypass",
 	version="0.1.3",
 	description="A package to extract video urls from 2 russian websites",
-	long_description=open('README.md').read(),
+	long_description=ld,
 	long_description_content_type="text/markdown",
 	author="okawo",
 	author_email="okawo.198@gmail.com",

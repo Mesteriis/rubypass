@@ -8,7 +8,7 @@ import re
 import logging
 import logging.config
 
-print ('（；^ω^）')
+print ('(;^ω^)')
 
 logLvl = logging.INFO
 
@@ -91,13 +91,13 @@ def seasonvarByPass(url, maxEps=30):
 		if ep > maxEps:
 			ep = maxEps
 
-			print ('maxed out, capping to {}'.format(ep))
+			#print ('maxed out, capping to {}'.format(ep))
 
 		ETA = ep*3
 
-		print ('ETA {}s'.format(ETA))
+		#print ('ETA {}s'.format(ETA))
 		log.info('ETA {}s'.format(ETA))
-		print (ep)
+		#print (ep)
 
 
 		subElem = browser.find_elements_by_xpath('//li[@data-translate="1"]')
@@ -168,13 +168,13 @@ def seasonvarByPassEp(url, ep):
 		else:
 			if 1 > ep:
 				ep = 1
-				print ('mined out, capping to {}'.format(ep))
+				#print ('mined out, capping to {}'.format(ep))
 
 			elif epLen < ep:
 				ep = epLen
-				print ('maxed out, capping to {}'.format(ep))
+				#print ('maxed out, capping to {}'.format(ep))
 
-		print (ep)
+		#print (ep)
 
 
 		subElem = browser.find_elements_by_xpath('//li[@data-translate="1"]')
@@ -284,11 +284,11 @@ def animevostBypassEp(url, ep):
 		else:
 			if int(name[0]) > ep:
 				ep = int(name[0])
-				print ('mined out, capping to {}'.format(ep))
+				#print ('mined out, capping to {}'.format(ep))
 
 			elif int(name[1]) < ep:
 				ep = int(name[1])
-				print ('maxed out, capping to {}'.format(ep))
+				#print ('maxed out, capping to {}'.format(ep))
 
 
 		epElem = browser.find_element_by_xpath('//div[@id="p{}"]'.format(ep-1))
@@ -383,7 +383,7 @@ def animevostBypass(url, maxEps=40):
 
 		ETA = name[1]*1.25
 
-		print ('ETA {}s'.format(ETA))
+		#print ('ETA {}s'.format(ETA))
 		log.info('ETA {}s'.format(ETA))
 
 		lolz = []
