@@ -4,6 +4,16 @@ yeah...
 ## requirements
 Firefox & gockodriver for firefox
 
+## installation
+
+```
+pip3 install -U rubypass
+```
+or
+```
+pip install -U rubypass
+```
+
 ## websites in question
 [seasonvar](http://seasonvar.ru/)
 
