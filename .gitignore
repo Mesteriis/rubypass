@@ -2,3 +2,4 @@ build
 dist
 rubypass.egg*
 *.log
+*.txt

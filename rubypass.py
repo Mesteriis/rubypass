@@ -17,7 +17,8 @@ logging.basicConfig(level=logLvl, format='%(asctime)s - %(name)s - %(levelname)s
 fh = logging.FileHandler(filename='webBypass.log', mode='a')
 
 log = logging.getLogger('rwbp')
-log.setLevel(logging.DEBUG)
+log.addHandler(fh)
+log.setLevel(logging.INFO)
 
 def klk(elem, driver):
 	action = webdriver.common.action_chains.ActionChains(driver)
