@@ -162,6 +162,8 @@ def seasonvarByPassEp(url, ep):
 
 		log.debug('target loaded')
 
+		time.sleep(2)
+
 		#print (browser.current_url)
 
 		epLen = len(browser.find_elements_by_xpath('//pjsdiv[@style="position: relative; right: 0px; top: 0px; cursor: pointer; height: 50px; overflow: hidden; width: 170px; display: inline-block; line-height: 1.5em; vertical-align: top; white-space: normal;"]'))
@@ -234,6 +236,8 @@ def showInfo(url):
 
 		log.debug('target loaded')
 
+		time.sleep(2)
+
 		#print (browser.current_url)
 
 		log.debug('getting information')
@@ -282,6 +286,8 @@ def animevostBypassEp(url, ep):
 		WebDriverWait(browser, 120).until(EC.presence_of_element_located((By.XPATH, '//div[@class="functionPanel"]')))
 
 		log.debug('target loaded')
+
+		time.sleep(2)
 
 		name = browser.find_element_by_xpath('//div[@class="shortstoryHead"]/h1').text
 		
@@ -341,6 +347,8 @@ def animevostInfo(url):
 
 		log.debug('target loaded')
 
+		time.sleep(2)
+
 		log.debug('getting information')
 
 		name = browser.find_element_by_xpath('//div[@class="shortstoryHead"]/h1').text
@@ -391,6 +399,8 @@ def animevostBypass(url, maxEps=40):
 		WebDriverWait(browser, 120).until(EC.presence_of_element_located((By.XPATH, '//div[@class="functionPanel"]')))
 
 		log.debug('target loaded')
+
+		time.sleep(2)
 
 		name = browser.find_element_by_xpath('//div[@class="shortstoryHead"]/h1').text
 
