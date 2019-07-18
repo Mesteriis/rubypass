@@ -5,13 +5,13 @@ with open('README.md') as f:
 
 setuptools.setup(
 	name="rubypass",
-	version="0.1.6",
+	version="0.2.0",
 	description="A package to extract video urls from 2 russian websites",
 	long_description=ld,
 	long_description_content_type="text/markdown",
 	author="okawo",
 	author_email="okawo.198@gmail.com",
-	url="https://github.com/okawo80085/russianWebBypass",
+	url="https://github.com/okawo80085/rubypass",
 	packages=setuptools.find_packages(),
 	classifiers=[
 		"Programming Language :: Python :: 3",

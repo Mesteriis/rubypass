@@ -16,7 +16,7 @@ logging.basicConfig(level=logLvl, format='%(asctime)s - %(name)s - %(levelname)s
 
 fh = logging.FileHandler(filename='webBypass.log', mode='a')
 
-log = logging.getLogger('rwbp')
+log = logging.getLogger('rubypass')
 log.addHandler(fh)
 log.setLevel(logging.INFO)
 
@@ -85,8 +85,12 @@ def seasonvarByPass(url, maxEps=30):
 
 		#print (browser.current_url)
 
+		time.sleep(2)
+
 		vods = []
 		ep = len(browser.find_elements_by_xpath('//pjsdiv[@style="position: relative; right: 0px; top: 0px; cursor: pointer; height: 50px; overflow: hidden; width: 170px; display: inline-block; line-height: 1.5em; vertical-align: top; white-space: normal;"]'))
+
+		log.debug(ep)
 
 		if ep > maxEps:
 			ep = maxEps
@@ -162,6 +166,8 @@ def seasonvarByPassEp(url, ep):
 
 		epLen = len(browser.find_elements_by_xpath('//pjsdiv[@style="position: relative; right: 0px; top: 0px; cursor: pointer; height: 50px; overflow: hidden; width: 170px; display: inline-block; line-height: 1.5em; vertical-align: top; white-space: normal;"]'))
 
+		log.debug(epLen)
+
 		if 1 <= ep <= epLen:
 			pass
 
@@ -193,6 +199,8 @@ def seasonvarByPassEp(url, ep):
 
 		klk(elem, browser)
 		log.debug('target episode obj clicked')
+
+		time.sleep(1/2)
 
 		vod = getVod(browser)
 
@@ -276,6 +284,9 @@ def animevostBypassEp(url, ep):
 		log.debug('target loaded')
 
 		name = browser.find_element_by_xpath('//div[@class="shortstoryHead"]/h1').text
+		
+		log.debug(name)
+
 		name = name.rsplit(']')[0].rsplit('[')[1].split(' ')[0].split('-')
 
 		if int(name[0]) <= ep <= int(name[1]):
@@ -333,6 +344,9 @@ def animevostInfo(url):
 		log.debug('getting information')
 
 		name = browser.find_element_by_xpath('//div[@class="shortstoryHead"]/h1').text
+
+		log.debug(name)
+
 		eps = [int(i) for i in name.rsplit(']')[0].rsplit('[')[1].split(' ')[0].split('-')]
 		name = name.split('/')[1].split('[')[0].strip(' ')
 
@@ -379,6 +393,9 @@ def animevostBypass(url, maxEps=40):
 		log.debug('target loaded')
 
 		name = browser.find_element_by_xpath('//div[@class="shortstoryHead"]/h1').text
+
+		log.debug(name)
+
 		name = [int(i) for i in name.split(']')[0].split('[')[1].split(' ')[0].split('-')]
 
 		ETA = name[1]*1.25

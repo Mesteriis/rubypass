@@ -31,7 +31,7 @@ Arguments:
 
 
 Returns:
-* ```err``` - bool, True if an exeption occured in exucution, False otherwise
+* ```err``` - bool, True if an exception occured in exucution, False otherwise
 * ```vods``` - list of strings, list of extracted video urls
 * ```ep``` - int, maximum amount of episodes availible on ```url```
 
@@ -43,7 +43,7 @@ Arguments:
 * ```ep``` - int, index of an episode to be extracted, can be lower or higher then episode count of the show(required)
 
 Returns:
-* ```err``` - bool, True if an exeption occured in exucution, False otherwise
+* ```err``` - bool, True if an exception occured in exucution, False otherwise
 * ```vod``` - str, url to a video source
 * ```ep2``` - int, processed ```ep```
 
@@ -54,7 +54,7 @@ Arguments:
 * ```url``` - str, a link to a show from seasonvar(required)
 
 Returns:
-* ```err``` - bool, True if an exeption occured in exucution, False otherwise
+* ```err``` - bool, True if an exception occured in exucution, False otherwise
 * ```lolz``` - list of strings, list of urls to other seasons of the show, if present
 * ```ep``` - int, maximum amount of episodes availible on ```url```
 
@@ -66,7 +66,7 @@ Arguments:
 * ```maxEps``` - int, maximum amount of episodes to extract, default is 40(optional)
 
 Returns:
-* ```err``` - bool, True if an exeption occured in exucution, False otherwise
+* ```err``` - bool, True if an exception occured in exucution, False otherwise
 * ```lolz``` - list of strings, list of extracted video urls
 * ```name[1]``` - int, maximum amount of episodes availible on ```url```
 
@@ -78,7 +78,7 @@ Arguments:
 * ```ep``` - int, index of an episode to be extracted, can be lower or higher then episode count of the show(required)
 
 Returns:
-* ```err``` - bool, True if an exeption occured in exucution, False otherwise
+* ```err``` - bool, True if an exception occured in exucution, False otherwise
 * ```vod``` - str, url to a video source
 * ```ep2``` - int, processed ```ep```
 
@@ -89,7 +89,7 @@ Arguments:
 * ```url``` - str, a link to a show from animevost(required)
 
 Returns:
-* ```err``` - bool, True if an exeption occured in exucution, False otherwise
+* ```err``` - bool, True if an exception occured in exucution, False otherwise
 * ```eps``` - list of ints, min and max values about episodes of the show
 * ```name``` - str, name of the show
 * ```lolz``` - list of strings, list of urls to other seasons of the show, if present
