@@ -31,9 +31,9 @@ Arguments:
 
 
 Returns:
-* ```err``` - bool, True if an exception occured in exucution, False otherwise
+* ```err``` - bool, True if an exception occurred in execution, False otherwise
 * ```vods``` - list of strings, list of extracted video urls
-* ```ep``` - int, maximum amount of episodes availible on ```url```
+* ```ep``` - int, maximum amount of episodes available on ```url```
 
 #### ```seasonvarByPassEp(url, ep)```
 extracts a video url of a provided episode from a provided *seasonvar* url, extracts original dub if possible
@@ -43,7 +43,7 @@ Arguments:
 * ```ep``` - int, index of an episode to be extracted, can be lower or higher then episode count of the show(required)
 
 Returns:
-* ```err``` - bool, True if an exception occured in exucution, False otherwise
+* ```err``` - bool, True if an exception occurred in execution, False otherwise
 * ```vod``` - str, url to a video source
 * ```ep2``` - int, processed ```ep```
 
@@ -54,9 +54,9 @@ Arguments:
 * ```url``` - str, a link to a show from seasonvar(required)
 
 Returns:
-* ```err``` - bool, True if an exception occured in exucution, False otherwise
+* ```err``` - bool, True if an exception occurred in execution, False otherwise
 * ```lolz``` - list of strings, list of urls to other seasons of the show, if present
-* ```ep``` - int, maximum amount of episodes availible on ```url```
+* ```ep``` - int, maximum amount of episodes available on ```url```
 
 #### ```animevostBypass(url, maxEps=40)```
 extracts video urls, season at a time if not maxed out by ```maxEps```, from a provided *animevost* url
@@ -66,9 +66,9 @@ Arguments:
 * ```maxEps``` - int, maximum amount of episodes to extract, default is 40(optional)
 
 Returns:
-* ```err``` - bool, True if an exception occured in exucution, False otherwise
+* ```err``` - bool, True if an exception occurred in execution, False otherwise
 * ```lolz``` - list of strings, list of extracted video urls
-* ```name[1]``` - int, maximum amount of episodes availible on ```url```
+* ```name[1]``` - int, maximum amount of episodes available on ```url```
 
 #### ```animevostBypassEp(url, ep)```
 extracts a video url of a provided episode from a provided *animevost* url
@@ -78,7 +78,7 @@ Arguments:
 * ```ep``` - int, index of an episode to be extracted, can be lower or higher then episode count of the show(required)
 
 Returns:
-* ```err``` - bool, True if an exception occured in exucution, False otherwise
+* ```err``` - bool, True if an exception occurred in execution, False otherwise
 * ```vod``` - str, url to a video source
 * ```ep2``` - int, processed ```ep```
 
@@ -89,7 +89,7 @@ Arguments:
 * ```url``` - str, a link to a show from animevost(required)
 
 Returns:
-* ```err``` - bool, True if an exception occured in exucution, False otherwise
+* ```err``` - bool, True if an exception occurred in execution, False otherwise
 * ```eps``` - list of ints, min and max values about episodes of the show
 * ```name``` - str, name of the show
 * ```lolz``` - list of strings, list of urls to other seasons of the show, if present
@@ -105,7 +105,7 @@ Arguments:
 Returns: ```None```
 
 #### ```firefoxDriverInit()```
-contructs a webDriver object and returns it with parameters
+constructs a webDriver object and returns it with parameters
 ```python
 'permissions.default.image' = 2 # images are off
 'dom.ipc.plugins.enabled.libflashplayer.so' = False # flash is off
@@ -114,7 +114,7 @@ contructs a webDriver object and returns it with parameters
 ```
 
 #### ```firefoxDriverInit2()```
-contructs a webDriver object and returns it with parameters
+constructs a webDriver object and returns it with parameters
 ```python
 'permissions.default.image' = 2 # images are off
 'permissions.default.stylesheet' = 2 # most css is off
