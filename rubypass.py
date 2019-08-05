@@ -10,11 +10,11 @@ import logging.config
 
 print ('(;^ω^)')
 
-logLvl = logging.INFO
-
-logging.basicConfig(level=logLvl, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-
 fh = logging.FileHandler(filename='webBypass.log', mode='a')
+
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+
+fh.setFormatter(formatter)
 
 log = logging.getLogger('rubypass')
 log.addHandler(fh)
@@ -116,22 +116,27 @@ def seasonvarByPass(url, maxEps=30):
 		log.debug('starting episode extract')
 
 		for i in range(ep):
-			elem = browser.find_element_by_xpath('//pjsdiv[@fid="{}" and @style="position: relative; right: 0px; top: 0px; cursor: pointer; height: 50px; overflow: hidden; width: 170px; display: inline-block; line-height: 1.5em; vertical-align: top; white-space: normal;"]'.format(i))
-			klk(elem, browser)
+			try:
+				elem = browser.find_element_by_xpath('//pjsdiv[@fid="{}" and @style="position: relative; right: 0px; top: 0px; cursor: pointer; height: 50px; overflow: hidden; width: 170px; display: inline-block; line-height: 1.5em; vertical-align: top; white-space: normal;"]'.format(i))
+				klk(elem, browser)
 
-			adElem = browser.find_element_by_xpath('//pjsdiv[@id="oframehtmlPlayer"]')
+				adElem = browser.find_element_by_xpath('//pjsdiv[@id="oframehtmlPlayer"]')
 
-			time.sleep(1/2)
+				time.sleep(1/2)
 
-			klk(adElem, browser)
+				klk(adElem, browser)
 
-			aw = browser.window_handles
-			if len(aw) >= 2:
-				browser.switch_to_window(aw[1])
-				browser.close()
-				browser.switch_to_window(aw[0])
+				aw = browser.window_handles
+				if len(aw) >= 2:
+					browser.switch_to_window(aw[1])
+					browser.close()
+					browser.switch_to_window(aw[0])
 
-			vods.append(getVod(browser))
+				vods.append(getVod(browser))
+
+			except Exception as e:
+				log.debug('episode {} failed: {}'.format(i, e))
+				vods.append('failed')
 
 		browser.quit()
 		log.debug('done')
@@ -150,6 +155,7 @@ def seasonvarByPass(url, maxEps=30):
 def seasonvarByPassEp(url, ep):
 	log.info('seasonvar episode bypass init\n')
 	log.info('url={}, ep={}'.format(url, ep))
+	ep2 = ep
 
 	browser = firefoxDriverInit()
 
@@ -166,21 +172,27 @@ def seasonvarByPassEp(url, ep):
 
 		#print (browser.current_url)
 
-		epLen = len(browser.find_elements_by_xpath('//pjsdiv[@style="position: relative; right: 0px; top: 0px; cursor: pointer; height: 50px; overflow: hidden; width: 170px; display: inline-block; line-height: 1.5em; vertical-align: top; white-space: normal;"]'))
+		try:
+			epLen = len(browser.find_elements_by_xpath('//pjsdiv[@style="position: relative; right: 0px; top: 0px; cursor: pointer; height: 50px; overflow: hidden; width: 170px; display: inline-block; line-height: 1.5em; vertical-align: top; white-space: normal;"]'))
 
-		log.debug(epLen)
 
-		if 1 <= ep <= epLen:
-			pass
+			log.debug(epLen)
 
-		else:
-			if 1 > ep:
-				ep = 1
-				#print ('mined out, capping to {}'.format(ep))
+			if 1 <= ep <= epLen:
+				pass
 
-			elif epLen < ep:
-				ep = epLen
-				#print ('maxed out, capping to {}'.format(ep))
+			else:
+				if 1 > ep:
+					ep = 1
+					#print ('mined out, capping to {}'.format(ep))
+
+				elif epLen < ep:
+					ep = epLen
+					#print ('maxed out, capping to {}'.format(ep))
+
+		except Exception as e:
+			log.debug('failed to get episode count of the show: {}'.format(e))
+			ep = ep2
 
 		#print (ep)
 
@@ -274,6 +286,7 @@ def showInfo(url):
 def animevostBypassEp(url, ep):
 	log.info('animevost episode bypass init\n')
 	log.info('url={}, ep={}'.format(url, ep))
+	ep2 = ep
 
 	browser = firefoxDriverInit()
 
@@ -289,24 +302,27 @@ def animevostBypassEp(url, ep):
 
 		time.sleep(2)
 
-		name = browser.find_element_by_xpath('//div[@class="shortstoryHead"]/h1').text
-		
-		log.debug(name)
+		try:
+			name = browser.find_element_by_xpath('//div[@class="shortstoryHead"]/h1').text
+			
+			log.debug(name)
 
-		name = name.rsplit(']')[0].rsplit('[')[1].split(' ')[0].split('-')
+			name = name.replace('\n', ' ').rsplit(']')[0].rsplit('[')[1].split(' ')[0].split('-')
 
-		if int(name[0]) <= ep <= int(name[1]):
-			pass
+			if int(name[0]) <= ep <= int(name[1]):
+				pass
 
-		else:
-			if int(name[0]) > ep:
-				ep = int(name[0])
-				#print ('mined out, capping to {}'.format(ep))
+			else:
+				if int(name[0]) > ep:
+					ep = int(name[0])
+					#print ('mined out, capping to {}'.format(ep))
 
-			elif int(name[1]) < ep:
-				ep = int(name[1])
-				#print ('maxed out, capping to {}'.format(ep))
-
+				elif int(name[1]) < ep:
+					ep = int(name[1])
+					#print ('maxed out, capping to {}'.format(ep))
+		except Exception as e:
+			log.debug('failed to get episode count of the show: {}'.format(e))
+			ep = ep2
 
 		epElem = browser.find_element_by_xpath('//div[@id="p{}"]'.format(ep-1))
 
@@ -402,13 +418,22 @@ def animevostBypass(url, maxEps=40):
 
 		time.sleep(2)
 
-		name = browser.find_element_by_xpath('//div[@class="shortstoryHead"]/h1').text
+		try:
+			name = browser.find_element_by_xpath('//div[@class="shortstoryHead"]/h1').text
 
-		log.debug(name)
+			log.debug(name)
 
-		name = [int(i) for i in name.split(']')[0].split('[')[1].split(' ')[0].split('-')]
+			name = [int(i) for i in name.split(']')[0].split('[')[1].split(' ')[0].split('-')]
 
-		ETA = name[1]*1.25
+			if int(name[1]) > maxEps:
+				name[1] = maxEps
+
+			ETA = name[1]*1.25
+
+		except Exception as e:
+			log.debug('failed to get episode count of the show: {}'.format(e))
+			name = (0, 1)
+			ETA = -1
 
 		#print ('ETA {}s'.format(ETA))
 		log.info('ETA {}s'.format(ETA))
@@ -419,12 +444,17 @@ def animevostBypass(url, maxEps=40):
 		log.debug('starting episode extract')
 
 		for i in range(name[1]):
-			epElem = browser.find_element_by_xpath('//div[@id="p{}"]'.format(i))
+			try:
+				epElem = browser.find_element_by_xpath('//div[@id="p{}"]'.format(i))
 
-			klk(epElem, browser)
-			time.sleep(1/1.5)
+				klk(epElem, browser)
+				time.sleep(1/2)
 
-			lolz.append(getVod2(browser))
+				lolz.append(getVod2(browser))
+
+			except Exception as e:
+				log.debug('episode {} failed: {}'.format(i, e))
+				lolz.append('failed')
 
 		browser.quit()
 		log.debug('done')
