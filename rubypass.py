@@ -10,6 +10,8 @@ import logging.config
 
 print ('(;^ω^)')
 
+__version__ = '0.2.3.1'
+
 fh = logging.FileHandler(filename='webBypass.log', mode='a')
 
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
@@ -68,9 +70,10 @@ def firefoxDriverInit2():
 
 	return webdriver.Firefox(firefox_profile=firefox_profile)
 
-def seasonvarByPass(url, maxEps=30):
+def seasonvarByPass(url, maxEps=30, delayz=(2, 0.6)):
 	log.info('seasonvar season bypass init\n')
 	log.info('url={}, maxEps={}'.format(url, maxEps))
+	log.debug('delays used(in seconds) {}'.format(delayz))
 
 	browser = firefoxDriverInit()
 
@@ -85,7 +88,7 @@ def seasonvarByPass(url, maxEps=30):
 
 		#print (browser.current_url)
 
-		time.sleep(2)
+		time.sleep(delayz[0])
 
 		vods = []
 		ep = len(browser.find_elements_by_xpath('//pjsdiv[@style="position: relative; right: 0px; top: 0px; cursor: pointer; height: 50px; overflow: hidden; width: 170px; display: inline-block; line-height: 1.5em; vertical-align: top; white-space: normal;"]'))
@@ -122,7 +125,7 @@ def seasonvarByPass(url, maxEps=30):
 
 				adElem = browser.find_element_by_xpath('//pjsdiv[@id="oframehtmlPlayer"]')
 
-				time.sleep(1/2)
+				time.sleep(delayz[1])
 
 				klk(adElem, browser)
 
@@ -152,9 +155,10 @@ def seasonvarByPass(url, maxEps=30):
 
 	return False, vods, ep
 
-def seasonvarByPassEp(url, ep):
+def seasonvarByPassEp(url, ep, delayz=(2, 3, 0.6)):
 	log.info('seasonvar episode bypass init\n')
 	log.info('url={}, ep={}'.format(url, ep))
+	log.debug('delays used(in seconds) {}'.format(delayz))
 	ep2 = ep
 
 	browser = firefoxDriverInit()
@@ -168,7 +172,7 @@ def seasonvarByPassEp(url, ep):
 
 		log.debug('target loaded')
 
-		time.sleep(2)
+		time.sleep(delayz[0])
 
 		#print (browser.current_url)
 
@@ -205,7 +209,7 @@ def seasonvarByPassEp(url, ep):
 			klk(subElem[0], browser)
 			log.debug('original dub obj clicked')
 
-		time.sleep(3)
+		time.sleep(delayz[1])
 
 		elem = browser.find_element_by_xpath('//pjsdiv[@fid="{}" and @style="position: relative; right: 0px; top: 0px; cursor: pointer; height: 50px; overflow: hidden; width: 170px; display: inline-block; line-height: 1.5em; vertical-align: top; white-space: normal;"]'.format(ep-1))
 
@@ -214,7 +218,7 @@ def seasonvarByPassEp(url, ep):
 		klk(elem, browser)
 		log.debug('target episode obj clicked')
 
-		time.sleep(1/2)
+		time.sleep(delayz[2])
 
 		vod = getVod(browser)
 
@@ -225,16 +229,17 @@ def seasonvarByPassEp(url, ep):
 		browser.quit()
 
 		log.error('seasonvar episode bypass failed', exc_info=True)
-		
+
 		return True, None, None
 
 	log.info('seasonvar episode bypass complete')
 
 	return False, vod, ep
 
-def showInfo(url):
+def showInfo(url, delayz=(2,)):
 	log.info('seasonvar info bypass init\n')
 	log.info(url)
+	log.debug('delays used(in seconds) {}'.format(delayz))
 
 	browser = firefoxDriverInit()
 
@@ -248,7 +253,7 @@ def showInfo(url):
 
 		log.debug('target loaded')
 
-		time.sleep(2)
+		time.sleep(delayz[0])
 
 		#print (browser.current_url)
 
@@ -276,16 +281,17 @@ def showInfo(url):
 		browser.quit()
 
 		log.error('seasonvar info bypass failed', exc_info=True)
-		
+
 		return True, None, None
 
 	log.info('seasonvar info bypass complete')
 
 	return False, lolz, ep
 
-def animevostBypassEp(url, ep):
+def animevostBypassEp(url, ep, delayz=(2, 1)):
 	log.info('animevost episode bypass init\n')
 	log.info('url={}, ep={}'.format(url, ep))
+	log.debug('delays used(in seconds) {}'.format(delayz))
 	ep2 = ep
 
 	browser = firefoxDriverInit()
@@ -300,11 +306,11 @@ def animevostBypassEp(url, ep):
 
 		log.debug('target loaded')
 
-		time.sleep(2)
+		time.sleep(delayz[0])
 
 		try:
 			name = browser.find_element_by_xpath('//div[@class="shortstoryHead"]/h1').text
-			
+
 			log.debug(name)
 
 			name = name.replace('\n', ' ').rsplit(']')[0].rsplit('[')[1].split(' ')[0].split('-')
@@ -330,7 +336,7 @@ def animevostBypassEp(url, ep):
 
 		klk(epElem, browser)
 		log.debug('target episode obj clicked')
-		time.sleep(1)
+		time.sleep(delayz[1])
 
 		vod2 = getVod2(browser)
 
@@ -341,16 +347,17 @@ def animevostBypassEp(url, ep):
 		browser.quit()
 
 		log.error('animevost episode bypass failed', exc_info=True)
-		
+
 		return True, None, None
 
 	log.info('animevost episode bypass complete')
 
 	return False, vod2, ep
 
-def animevostInfo(url):
+def animevostInfo(url, delayz=(2,)):
 	log.info('animevost info bypass init\n')
 	log.info(url)
+	log.debug('delays used(in seconds) {}'.format(delayz))
 	browser = firefoxDriverInit2()
 
 	browser.set_window_position(0, 0)
@@ -358,12 +365,12 @@ def animevostInfo(url):
 
 	try:
 		browser.get(url)
-		
+
 		WebDriverWait(browser, 120).until(EC.presence_of_element_located((By.XPATH, '//div[@class="functionPanel"]')))
 
 		log.debug('target loaded')
 
-		time.sleep(2)
+		time.sleep(delayz[0])
 
 		log.debug('getting information')
 
@@ -392,7 +399,7 @@ def animevostInfo(url):
 		browser.quit()
 
 		log.error('animevost info bypass failed', exc_info=True)
-		
+
 		return True, None, None
 
 	log.info('animevost info bypass complete')
@@ -400,9 +407,10 @@ def animevostInfo(url):
 	return False, eps, name, lolz
 
 
-def animevostBypass(url, maxEps=40):
+def animevostBypass(url, maxEps=40, delayz=(2, 0.8)):
 	log.info('animevost season bypass init\n')
 	log.info('url={}, maxEps={}'.format(url, maxEps))
+	log.debug('delays used(in seconds) {}'.format(delayz))
 
 	browser = firefoxDriverInit()
 
@@ -416,7 +424,7 @@ def animevostBypass(url, maxEps=40):
 
 		log.debug('target loaded')
 
-		time.sleep(2)
+		time.sleep(delayz[0])
 
 		try:
 			name = browser.find_element_by_xpath('//div[@class="shortstoryHead"]/h1').text
@@ -448,7 +456,7 @@ def animevostBypass(url, maxEps=40):
 				epElem = browser.find_element_by_xpath('//div[@id="p{}"]'.format(i))
 
 				klk(epElem, browser)
-				time.sleep(1/2)
+				time.sleep(delayz[1])
 
 				lolz.append(getVod2(browser))
 
