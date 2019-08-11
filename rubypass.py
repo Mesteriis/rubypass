@@ -155,7 +155,7 @@ def seasonvarByPass(url, maxEps=30, delayz=(2, 0.6)):
 
 	return False, vods, ep
 
-def seasonvarByPassEp(url, ep, delayz=(2, 3, 0.6)):
+def seasonvarByPassEp(url, ep, delayz=(2, 3, 2)):
 	log.info('seasonvar episode bypass init\n')
 	log.info('url={}, ep={}'.format(url, ep))
 	log.debug('delays used(in seconds) {}'.format(delayz))
@@ -215,6 +215,7 @@ def seasonvarByPassEp(url, ep, delayz=(2, 3, 0.6)):
 
 		log.debug('target episode obj found')
 
+		klk(elem, browser)
 		klk(elem, browser)
 		log.debug('target episode obj clicked')
 

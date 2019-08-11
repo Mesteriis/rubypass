@@ -6,6 +6,9 @@ Firefox & gockodriver for firefox
 
 ## installation
 
+Libs:
+* `selenium`
+
 ```
 pip3 install -U rubypass
 ```
