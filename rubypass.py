@@ -10,7 +10,7 @@ import logging.config
 
 print ('(;^ω^)')
 
-__version__ = '0.2.3.1'
+__version__ = '0.2.4.4'
 
 fh = logging.FileHandler(filename='webBypass.log', mode='a')
 
