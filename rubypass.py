@@ -10,7 +10,7 @@ import logging.config
 
 print ('(;^ω^)')
 
-__version__ = '0.2.4.4'
+__version__ = '0.2.5.0'
 
 fh = logging.FileHandler(filename='webBypass.log', mode='a')
 
@@ -408,7 +408,7 @@ def animevostInfo(url, delayz=(2,)):
 	return False, eps, name, lolz
 
 
-def animevostBypass(url, maxEps=40, delayz=(2, 0.8)):
+def animevostBypass(url, epRange=None, maxEps=40, delayz=(2, 0.8)):
 	log.info('animevost season bypass init\n')
 	log.info('url={}, maxEps={}'.format(url, maxEps))
 	log.debug('delays used(in seconds) {}'.format(delayz))
@@ -434,8 +434,25 @@ def animevostBypass(url, maxEps=40, delayz=(2, 0.8)):
 
 			name = [int(i) for i in name.split(']')[0].split('[')[1].split(' ')[0].split('-')]
 
+			if epRange != None:
+				if epRange[1] > int(name[1]):
+					epRange[1] = int(name[1])
+
+				if epRange[0] < 0:
+					epRange[0] = 0
+
+				if epRange[1]-epRange[0] > maxEps:
+					epRange = None
+
+			if epRange != None:
+				name[0] = epRange[0]
+				name[1] = epRange[1]
+
 			if int(name[1]) > maxEps:
 				name[1] = maxEps
+
+			if int(name[0]) > 0:
+				name[0] -= 1
 
 			ETA = name[1]*1.25
 
@@ -452,7 +469,7 @@ def animevostBypass(url, maxEps=40, delayz=(2, 0.8)):
 		log.debug('{} episodes to extract'.format(name[1]))
 		log.debug('starting episode extract')
 
-		for i in range(name[1]):
+		for i in range(name[0], name[1]):
 			try:
 				epElem = browser.find_element_by_xpath('//div[@id="p{}"]'.format(i))
 
@@ -478,3 +495,7 @@ def animevostBypass(url, maxEps=40, delayz=(2, 0.8)):
 	log.info('animevost season bypass complete')
 
 	return False, lolz, name[1]
+
+def ppp(li):
+	for i2, i in enumerate(li):
+		print ('{} => {}'.format(i2+1, i))
