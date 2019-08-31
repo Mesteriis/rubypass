@@ -5,7 +5,7 @@ with open('README.md') as f:
 
 setuptools.setup(
 	name="rubypass",
-	version="0.2.5.0",
+	version="0.2.5.1",
 	description="A package made to extract video urls from 2 russian websites",
 	long_description=ld,
 	long_description_content_type="text/markdown",

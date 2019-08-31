@@ -10,7 +10,7 @@ import logging.config
 
 print ('(;^ω^)')
 
-__version__ = '0.2.5.0'
+__version__ = '0.2.5.1'
 
 fh = logging.FileHandler(filename='webBypass.log', mode='a')
 
@@ -496,6 +496,11 @@ def animevostBypass(url, epRange=None, maxEps=40, delayz=(2, 0.8)):
 
 	return False, lolz, name[1]
 
-def ppp(li):
-	for i2, i in enumerate(li):
+def ppp(li, episode=None):
+	obj = enumerate(li)
+
+	if episode != None:
+		obj = zip(range(episode-len(li), episode), li)
+
+	for i2, i in obj:
 		print ('{} => {}'.format(i2+1, i))
